@@ -1,0 +1,67 @@
+[Uploading index.html…]()
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albergues a la obra 🐶💙</title>
+    <style>
+        body {font-family: Arial, sans-serif; background-color: #e6f0ff; margin: 0; padding: 0;}
+        header {background-color: #004080; color: white; text-align: center; padding: 25px 0;}
+        form {background-color: #cce0ff; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; margin: 40px auto;}
+        input, textarea {width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #004080;}
+        button {background-color: #004080; color: white; padding: 12px; border: none; border-radius: 10px; width: 100%; margin-top: 20px; cursor: pointer;}
+        button:hover {background-color: #00264d;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Albergues a la obra 🐶💙</h1>
+    </header>
+
+    <form id="shelterForm">
+        <h2>Registrar un Albergue 🐕💙</h2>
+
+        <label>Nombre del albergue:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label>Dirección:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label>Contacto:</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <label>Necesidades:</label>
+        <textarea id="needs" name="needs" required></textarea>
+
+        <label>Capacidad de perros:</label>
+        <input type="number" id="capacity" name="capacity" required min="1">
+
+        <button type="submit">Enviar registro 🐶💙</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('shelterForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                name: form.name.value,
+                address: form.address.value,
+                contact: form.contact.value,
+                needs: form.needs.value,
+                capacity: form.capacity.value
+            };
+
+            const response = await fetch('/registrar', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.mensaje);
+            form.reset();
+        });
+    </script>
+</body>
+</html>
