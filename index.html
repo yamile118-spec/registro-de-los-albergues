@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albergues a la obra 🐶💙</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f0ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #004080;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        form {
+            background-color: #cce0ff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        form h2 {
+            text-align: center;
+            color: #00264d;
+            font-size: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #003366;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #004080;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #004080;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00264d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #003366;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Albergues a la obra 🐶💙</h1>
+    </header>
+
+    <main>
+        <form id="shelterForm">
+            <h2>Registrar un Albergue 🐕💙</h2>
+
+            <label for="name">Nombre del albergue:</label>
+            <input type="text" id="name" name="name" placeholder="Nombre del albergue" required>
+
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" name="address" placeholder="Dirección completa" required>
+
+            <label for="contact">Contacto (correo o teléfono):</label>
+            <input type="text" id="contact" name="contact" placeholder="Correo o teléfono" required>
+
+            <label for="needs">Necesidades:</label>
+            <textarea id="needs" name="needs" placeholder="Ej: Alimento, medicinas, cobijas..." required></textarea>
+
+            <label for="capacity">Capacidad de perros:</label>
+            <input type="number" id="capacity" name="capacity" placeholder="Número de perros que puede albergar" min="1" required>
+
+            <button type="submit">Registrar Albergue 🐶💙</button>
+        </form>
+    </main>
+
+    <footer>
+        "Juntos construimos un mundo con más colitas felices 🐾💙"
+    </footer>
+
+    <script>
+        const form = document.getElementById('shelterForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                contact: document.getElementById('contact').value,
+                needs: document.getElementById('needs').value,
+                capacity: document.getElementById('capacity').value
+            };
+
+            const response = await fetch('/registrar', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.mensaje);
+            form.reset();
+        });
+    </script>
+</body>
+</html>
