@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albergues a la obra 🐶💙</title>
+
+    <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,25 +15,19 @@
             margin: 0;
             padding: 0;
         }
-
         header {
             background-color: #004080;
             color: white;
             text-align: center;
             padding: 25px 0;
         }
-
-        header h1 {
-            font-size: 2rem;
-        }
-
+        header h1 { font-size: 2rem; }
         main {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
         }
-
         form {
             background-color: #cce0ff;
             padding: 30px;
@@ -39,13 +36,11 @@
             width: 100%;
             max-width: 500px;
         }
-
         form h2 {
             text-align: center;
             color: #00264d;
             font-size: 1.8rem;
         }
-
         label {
             display: block;
             margin-top: 15px;
@@ -53,7 +48,6 @@
             color: #003366;
             font-size: 1rem;
         }
-
         input[type="text"],
         input[type="email"],
         input[type="number"],
@@ -65,12 +59,10 @@
             border: 1px solid #004080;
             font-size: 1rem;
         }
-
         textarea {
             resize: vertical;
             min-height: 80px;
         }
-
         button {
             background-color: #004080;
             color: white;
@@ -83,11 +75,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
-        button:hover {
-            background-color: #00264d;
-        }
-
+        button:hover { background-color: #00264d; }
         footer {
             text-align: center;
             padding: 20px;
@@ -128,32 +116,31 @@
         "Juntos construimos un mundo con más colitas felices 🐾💙"
     </footer>
 
+    <!-- Script de envío de correo con EmailJS -->
     <script>
-        // Inicializa EmailJS con tu User ID
-        emailjs.init('JlQyocP0pyUgXgHLY');
+      (function() {
+        emailjs.init("LvzXnM9wRy0cy6sNs"); // ✅ Tu Public Key
+      })();
 
-        const form = document.getElementById('shelterForm');
+      document.getElementById('shelterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        const templateParams = {
+          name: document.getElementById('name').value,
+          address: document.getElementById('address').value,
+          contact: document.getElementById('contact').value,
+          needs: document.getElementById('needs').value,
+          capacity: document.getElementById('capacity').value
+        };
 
-            const templateParams = {
-                nombre: document.getElementById('name').value,
-                direccion: document.getElementById('address').value,
-                contacto: document.getElementById('contact').value,
-                necesidades: document.getElementById('needs').value,
-                capacidad: document.getElementById('capacity').value
-            };
-
-            emailjs.send('service_ys7ydv5', 'template_albergues', templateParams)
-                .then(function(response) {
-                    alert('✅ ¡Albergue registrado con éxito! 🐶💙');
-                    form.reset();
-                }, function(error) {
-                    alert('❌ Error al enviar, por favor intenta de nuevo.');
-                    console.error('FAILED...', error);
-                });
-        });
+        emailjs.send('service_yt8dgy6', 'template_g3e0urk', templateParams)
+          .then(function(response) {
+            alert("🐶 Registro enviado correctamente 💙");
+            document.getElementById('shelterForm').reset();
+          }, function(error) {
+            alert("❌ Error al enviar: " + JSON.stringify(error));
+          });
+      });
     </script>
 </body>
 </html>
